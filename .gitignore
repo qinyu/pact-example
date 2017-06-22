@@ -1,0 +1,10 @@
+*.ipr
+*.iws
+*.iml
+
+target/
+
+tres.sh
+.settings/
+.project
+.classpath

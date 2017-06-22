@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>pact-example-parent</artifactId>
+        <groupId>org.qinyu.demo</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pact-example-parent/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>pact-example-provider</artifactId>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>au.com.dius</groupId>
+                <artifactId>pact-jvm-provider-maven_2.11</artifactId>
+                <version>2.4.18</version>
+                <configuration>
+                    <serviceProviders>
+                        <!-- You can define as many as you need, but each must have a unique name -->
+                        <serviceProvider>
+                            <name>org.qinyu</name>
+                            <insecure>true</insecure>
+
+                            <!-- All the provider properties are optional, and have sensible defaults (shown below) -->
+                            <protocol>https</protocol>
+                            <host>api.fixer.io</host>
+                            <port>443</port>
+                            <path>/</path>
+                            <consumers>
+                                <!-- Again, you can define as many consumers for each provider as you need, but each must have a unique name -->
+                                <consumer>
+                                    <name>currency</name>
+                                    <!--  currently supports a file path using pactFile or a URL using pactUrl -->
+                                    <pactFile>../pact-example-consumer/target/pacts/org.qinyu-currency.json</pactFile>
+                                </consumer>
+                            </consumers>
+                        </serviceProvider>
+                    </serviceProviders>
+                    <pactBrokerUrl/>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
